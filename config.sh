@@ -1,6 +1,6 @@
 # Define custom utilities
 # Test for OSX with [ -n "$IS_OSX" ]
-LZO_VERSION=${LZO_VERSION:-2.0.9}
+LZO_VERSION=${LZO_VERSION:-2.09}
 
 function build_wheel {
     local repo_dir=${1:-$REPO_DIR}
@@ -12,9 +12,9 @@ function build_wheel {
 }
 
 function build_libs {
+    build_simple lzo $LZO_VERSION http://www.oberhumer.com/opensource/lzo/download
     build_hdf5
     build_bzip2
-    build_simple lzo $LZO_VERSION http://www.oberhumer.com/opensource/lzo/download
 }
 
 function build_linux_wheel {
