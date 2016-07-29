@@ -1,0 +1,6 @@
+[submodule "pytables"]
+	path = pytables
+	url = https://github.com/pytables/pytables.git
+[submodule "multibuild"]
+	path = multibuild
+	url = https://github.com/matthew-brett/multibuild.git
