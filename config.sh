@@ -1,5 +1,6 @@
 # Define custom utilities
 # Test for OSX with [ -n "$IS_OSX" ]
+LZO_VERSION=${LZO_VERSION:-2.0.9}
 
 function build_wheel {
     local repo_dir=${1:-$REPO_DIR}
@@ -12,6 +13,8 @@ function build_wheel {
 
 function build_libs {
     build_hdf5
+    build_bzip2
+    build_simple lzo $LZO_VERSION http://www.oberhumer.com/opensource/lzo/download
 }
 
 function build_linux_wheel {
@@ -68,8 +71,8 @@ function build_osx_wheel {
 
 function run_tests {
     # Runs tests on installed distribution from an empty directory
-    python -c "import tables; tables.test()"
+    python -m tables.tests.test_all
     if [ -n "$IS_OSX" ]; then  # Run 32-bit tests on dual arch wheel
-        arch -i386 python -c "import tables; tables.test()"
+        arch -i386 python -m tables.tests.test_all
     fi
 }
