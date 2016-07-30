@@ -46,8 +46,8 @@ function build_lzo {
 function build_libs {
     build_blosc
     build_lzo
+    if [ -z "$IS_OSX" ]; then build_bzip2; fi
     build_hdf5
-    build_bzip2
 }
 
 function build_linux_wheel {
@@ -71,8 +71,9 @@ function build_osx_wheel {
     brew install pkg-config
     # 32-bit wheel
     export CFLAGS="-arch i386"
-    export FFLAGS="-arch i386"
-    export LDFLAGS="-arch i386"
+    export CXXFLAGS="$CFLAGS"
+    export FFLAGS="$CFLAGS"
+    export LDFLAGS="$CFLAGS"
     # Build libraries
     source multibuild/library_builders.sh
     build_libs
@@ -86,8 +87,9 @@ function build_osx_wheel {
     mv ${wheelhouse}/*whl $wheelhouse32
     # 64-bit wheel
     export CFLAGS="-arch x86_64"
-    export FFLAGS="-arch x86_64"
-    export LDFLAGS="-arch x86_64"
+    export CXXFLAGS="$CFLAGS"
+    export FFLAGS="$CFLAGS"
+    export LDFLAGS="$CFLAGS"
     unset LDSHARED
     # Force rebuild of all libs
     rm *-stamp
