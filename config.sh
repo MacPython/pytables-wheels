@@ -30,6 +30,12 @@ function build_blosc {
     (cd c-blosc-${BLOSC_VERSION} \
         && $cmake -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX . \
         && make install)
+    if [ -n "$IS_OSX" ]; then
+        # Fix blosc library id bug
+        for lib in $(ls ${BUILD_PREFIX}/lib/libblosc*.dylib); do
+            install_name_tool -id $lib $lib
+        done
+    fi
     touch blosc-stamp
 }
 
@@ -45,8 +51,10 @@ function build_lzo {
 
 function build_libs {
     build_blosc
+    if [ -z "$IS_OSX" ]; then
+        build_bzip2
+    fi
     build_lzo
-    if [ -z "$IS_OSX" ]; then build_bzip2; fi
     build_hdf5
 }
 
