@@ -1,6 +1,7 @@
 # Define custom utilities
 # Test for OSX with [ -n "$IS_OSX" ]
 LZO_VERSION=${LZO_VERSION:-2.09}
+BLOSC_VERSION=1.10.2
 
 function build_wheel {
     local repo_dir=${1:-$REPO_DIR}
@@ -11,7 +12,29 @@ function build_wheel {
     fi
 }
 
+function get_cmake {
+    local cmake=cmake
+    if [ -n "$IS_OSX" ]; then
+        brew install cmake > /dev/null
+    else
+        yum install -y cmake28 > /dev/null
+        cmake=cmake28
+    fi
+    echo $cmake
+}
+
+function build_blosc {
+    if [ -e blosc-stamp ]; then return; fi
+    local cmake=$(get_cmake)
+    fetch_unpack https://github.com/Blosc/c-blosc/archive/v${BLOSC_VERSION}.tar.gz
+    (cd c-blosc-${BLOSC_VERSION} \
+        && $cmake -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX . \
+        && make install)
+    touch blosc-stamp
+}
+
 function build_libs {
+    build_blosc
     build_simple lzo $LZO_VERSION http://www.oberhumer.com/opensource/lzo/download
     build_hdf5
     build_bzip2
