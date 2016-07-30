@@ -33,9 +33,19 @@ function build_blosc {
     touch blosc-stamp
 }
 
+function build_lzo {
+    if [ -e lzo-stamp ]; then return; fi
+    fetch_unpack http://www.oberhumer.com/opensource/lzo/download/lzo-${LZO_VERSION}.tar.gz
+    (cd lzo-${LZO_VERSION} \
+        && ./configure --prefix=$BUILD_PREFIX --enable-shared \
+        && make \
+        && make install)
+    touch lzo-stamp
+}
+
 function build_libs {
     build_blosc
-    build_simple lzo $LZO_VERSION http://www.oberhumer.com/opensource/lzo/download
+    build_lzo
     build_hdf5
     build_bzip2
 }
