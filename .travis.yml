@@ -1,7 +1,7 @@
 env:
     global:
         - REPO_DIR=pytables
-        - BUILD_COMMIT=v.3.2.3.1
+        - BUILD_COMMIT=v3.3.0
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - NP_BUILD_DEP=1.8.0
