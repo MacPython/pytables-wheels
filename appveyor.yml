@@ -81,7 +81,7 @@ test_script:
     - "activate test_env"
 
     # install from wheel
-    - ps: $path = Get-ChildItem -path "dist" -recurse -Include *.whl; pip install $path
+    - "pip install --no-index --find-links dist/ %REPO_DIR%"
 
     # run test
     - "cd .."
