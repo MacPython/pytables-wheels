@@ -81,7 +81,7 @@ test_script:
     - "activate test_env"
 
     # install from wheel
-    - "pip install --no-index --find-links dist/ %REPO_DIR%"
+    - "pip install --no-index --find-links dist/ tables"
 
     # run test
     - "cd .."
