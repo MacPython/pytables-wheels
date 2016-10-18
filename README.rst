@@ -89,9 +89,10 @@ You will typically have a directory on your machine where you store wheels,
 called a `wheelhouse`.   The typical call for `wheel-uploader` would then
 be something like::
 
+    VERSION=3.3.0
     CDN_URL=https://3f23b170c54c2533c070-1c8a9b3114517dc5fe17b7c3f8c63a43.ssl.cf2.rackcdn.com
-    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t macosx tables 3.2.3
-    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t manylinux1 tables 3.2.3
+    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t macosx tables $VERSION
+    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t manylinux1 tables $VERSION
 
 where:
 
@@ -104,7 +105,7 @@ where:
 * ``-w ~/wheelhouse`` means download the wheels from to the local directory
   ``~/wheelhouse``.
 
-``tables`` is the root name of the wheel(s) to download / upload, and ``3.2.3``
+``tables`` is the root name of the wheel(s) to download / upload, and ``3.3.0``
 is the version to download / upload.
 
 In order to use the Warehouse PyPI server, you will need something like this
@@ -125,7 +126,7 @@ in your ``~/.pypirc`` file::
     password: your_password
 
 So, in this case, ``wheel-uploader`` will download all wheels starting with
-``tables-3.2.3-`` from http://wheels.scipy.org to ``~/wheelhouse``, then
+``tables-3.3.0-`` from http://wheels.scipy.org to ``~/wheelhouse``, then
 upload them to PyPI.
 
 Of course, you will need permissions to upload to PyPI, for this to work.
