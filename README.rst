@@ -8,6 +8,9 @@ the travis-ci OSX machines and the travis-ci Linux machines.
 The travis-ci interface for the builds is
 https://travis-ci.org/MacPython/pytables-wheels
 
+The appveyor interface for the builds is
+https://ci.appveyor.com/project/matthew-brett/pytables-wheels
+
 The driving github repository is
 https://github.com/MacPython/pytables-wheels
 
