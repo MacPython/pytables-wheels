@@ -55,8 +55,8 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
-        - NP_BUILD_DEP="1.11.3
-        - NP_TEST_DEP="1.11.3
+        - NP_BUILD_DEP="1.11.3"
+        - NP_TEST_DEP="1.11.3"
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
