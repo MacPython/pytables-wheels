@@ -11,7 +11,7 @@ env:
         # Following generated with
         # travis encrypt -r MacPython/h5py-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
         - secure:
-            "bScfa6ofgqkeRjtMH5iJgKLL7lVCyjwQ/HzJNlf9FUPrHfqnTs4oeikYKTMa92kLFhOg25Iqwy7sTQd1WmISGV+gvodEVev6OPiBErqBMeO1B6UijstNpiKLkNa+8s3tw1BSTkMzQGBH1kQsIkdfQyFmmC+rMjcZIxsaUiMtiYHH6972e2kNk2XFjAreNUHMw55nRxeY97ta0yCAYrldap0kHsH0fceBin1uT4MUQGr9CCZsz7Th508YFCNLapHIsCuBXCUPJ0jWniPBWWUlGq4sSTWhHmH5VPyj1Vwx2eyonQCp1M1U2FSaeu8TuIumZpNjBxV6BNI/SETTJzCk9BMuJo7cewdWadV2TXcTL0XdRahTZ2J0Oz3kcWPveJZ3fSMY0okelcnrSVmnZJNKqlIvuMtZGePBNfUGo7kwu+IYDOZLOcOg7+X4r2UbSrGPfcvDnDrJkp/YVsIzatB7okS8MGBUBiA0sR3oE9qQe3fV5GVKPMgkFcM2oKPMaVsuFb/bNnpUjjDtMravPbis0/qpQ/PCPfSvLehE7ki/KYpfRE4ShF/utIzHL+8ApFbH8iJmyI9eXS3A+5lq02LGhItRycvb6gBWjptCv8aSdEyIvCWdREgM9OTa+8NiKDnlH+JYSOqBG/Dw/v5TWPv82Vxc1pGMX9R4q1Wy1YE2igY=" 
+            "bScfa6ofgqkeRjtMH5iJgKLL7lVCyjwQ/HzJNlf9FUPrHfqnTs4oeikYKTMa92kLFhOg25Iqwy7sTQd1WmISGV+gvodEVev6OPiBErqBMeO1B6UijstNpiKLkNa+8s3tw1BSTkMzQGBH1kQsIkdfQyFmmC+rMjcZIxsaUiMtiYHH6972e2kNk2XFjAreNUHMw55nRxeY97ta0yCAYrldap0kHsH0fceBin1uT4MUQGr9CCZsz7Th508YFCNLapHIsCuBXCUPJ0jWniPBWWUlGq4sSTWhHmH5VPyj1Vwx2eyonQCp1M1U2FSaeu8TuIumZpNjBxV6BNI/SETTJzCk9BMuJo7cewdWadV2TXcTL0XdRahTZ2J0Oz3kcWPveJZ3fSMY0okelcnrSVmnZJNKqlIvuMtZGePBNfUGo7kwu+IYDOZLOcOg7+X4r2UbSrGPfcvDnDrJkp/YVsIzatB7okS8MGBUBiA0sR3oE9qQe3fV5GVKPMgkFcM2oKPMaVsuFb/bNnpUjjDtMravPbis0/qpQ/PCPfSvLehE7ki/KYpfRE4ShF/utIzHL+8ApFbH8iJmyI9eXS3A+5lq02LGhItRycvb6gBWjptCv8aSdEyIvCWdREgM9OTa+8NiKDnlH+JYSOqBG/Dw/v5TWPv82Vxc1pGMX9R4q1Wy1YE2igY="
 
 language: python
 # Default Python version is usually 2.7
@@ -43,19 +43,23 @@ matrix:
         - UNICODE_WIDTH=16
     - os: linux
       env:
-        - MB_PYTHON_VERSION=3.4
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.4
-        - PLAT=i686
-    - os: linux
-      env:
         - MB_PYTHON_VERSION=3.5
         - NP_BUILD_DEP="1.9.3"
         - NP_TEST_DEP="1.9.3"
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.5
+        - PLAT=i686
+        - NP_BUILD_DEP="1.9.3"
+        - NP_TEST_DEP="1.9.3"
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.6
+        - NP_BUILD_DEP="1.9.3"
+        - NP_TEST_DEP="1.9.3"
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.6
         - PLAT=i686
         - NP_BUILD_DEP="1.9.3"
         - NP_TEST_DEP="1.9.3"
@@ -69,13 +73,13 @@ matrix:
     - os: osx
       language: objective-c
       env:
-        - MB_PYTHON_VERSION=3.4
-        - NP_BUILD_DEP=1.8.1
-        - NP_TEST_DEP=1.8.1
+        - MB_PYTHON_VERSION=3.5
+        - NP_BUILD_DEP="1.9.3"
+        - NP_TEST_DEP="1.9.3"
     - os: osx
       language: objective-c
       env:
-        - MB_PYTHON_VERSION=3.5
+        - MB_PYTHON_VERSION=3.6
         - NP_BUILD_DEP="1.9.3"
         - NP_TEST_DEP="1.9.3"
 
