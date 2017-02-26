@@ -55,14 +55,14 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
-        - NP_BUILD_DEP="1.10.4"
-        - NP_TEST_DEP="1.10.4"
+        - NP_BUILD_DEP="1.11.3
+        - NP_TEST_DEP="1.11.3
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
         - PLAT=i686
-        - NP_BUILD_DEP="1.10.4"
-        - NP_TEST_DEP="1.10.4"
+        - NP_BUILD_DEP="1.11.3"
+        - NP_TEST_DEP="1.11.3"
     - os: osx
       language: objective-c
       env:
@@ -80,8 +80,8 @@ matrix:
       language: objective-c
       env:
         - MB_PYTHON_VERSION=3.6
-        - NP_BUILD_DEP="1.9.3"
-        - NP_TEST_DEP="1.9.3"
+        - NP_BUILD_DEP="1.11.3"
+        - NP_TEST_DEP="1.11.3"
 
 before_install:
     - BUILD_DEPENDS="numpy==$NP_BUILD_DEP six Cython"
