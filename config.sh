@@ -1,7 +1,7 @@
 # Define custom utilities
 # Test for OSX with [ -n "$IS_OSX" ]
 LZO_VERSION=2.09
-BLOSC_VERSION=1.10.2
+#BLOSC_VERSION=${BLOSC_VERSION:-1.10.2}
 
 function build_wheel {
     local repo_dir=${1:-$REPO_DIR}
@@ -13,7 +13,8 @@ function build_wheel {
 }
 
 function build_libs {
-    build_blosc
+    # Do not build blosc: Use built-in (issue: gh-5)
+    #build_blosc
     build_bzip2
     build_lzo
     build_hdf5
@@ -28,7 +29,8 @@ function build_linux_wheel {
     if [ -z "$(readelf --dynamic $bad_lib | grep RUNPATH)" ]; then
         patchelf --set-rpath $(dirname $bad_lib) $bad_lib
     fi
-    build_pip_wheel $@
+    export CFLAGS="$CFLAGS -std=gnu99"
+    build_bdist_wheel $@
 }
 
 function build_osx_wheel {
@@ -37,7 +39,7 @@ function build_osx_wheel {
     # Build dual arch wheel
     export CC=clang
     export CXX=clang++
-    brew install pkg-config
+    install_pkg_config
     # 32-bit wheel
     export CFLAGS="-arch i386"
     export CXXFLAGS="$CFLAGS"
