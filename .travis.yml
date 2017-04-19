@@ -92,7 +92,7 @@ matrix:
 
 before_install:
     - BUILD_DEPENDS="numpy==$NP_BUILD_DEP six Cython"
-    - TEST_DEPENDS="numpy==$NP_TEST_DEP six nose numexpr"
+    - TEST_DEPENDS="numpy==$NP_TEST_DEP six nose mock numexpr"
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     - before_install
