@@ -29,7 +29,7 @@ function build_linux_wheel {
     if [ -z "$(readelf --dynamic $bad_lib | grep RUNPATH)" ]; then
         patchelf --set-rpath $(dirname $bad_lib) $bad_lib
     fi
-    export CFLAGS="$CFLAGS -std=gnu99"
+    export CFLAGS="$CFLAGS -std=gnu99 -mno-avx2"
     build_bdist_wheel $@
 }
 
