@@ -1,7 +1,7 @@
 # Define custom utilities
 # Test for OSX with [ -n "$IS_OSX" ]
 LZO_VERSION=2.09
-#BLOSC_VERSION=${BLOSC_VERSION:-1.10.2}
+BLOSC_VERSION=${BLOSC_VERSION:-1.10.2}
 
 function build_wheel {
     local repo_dir=${1:-$REPO_DIR}
@@ -13,8 +13,8 @@ function build_wheel {
 }
 
 function build_libs {
-    # use pytables built-in blosc
-    #build_blosc
+    # pytables built-in blosc forces -mavx2
+    build_blosc
     build_bzip2
     build_lzo
     build_hdf5
@@ -29,7 +29,7 @@ function build_linux_wheel {
     if [ -z "$(readelf --dynamic $bad_lib | grep RUNPATH)" ]; then
         patchelf --set-rpath $(dirname $bad_lib) $bad_lib
     fi
-    export CFLAGS="$CFLAGS -std=gnu99 -march=core2"
+    export CFLAGS="$CFLAGS"
     build_bdist_wheel $@
 }
 
