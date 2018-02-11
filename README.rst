@@ -83,7 +83,7 @@ script for doing this, housed at :
 https://github.com/MacPython/terryfy/blob/master/wheel-uploader
 
 For the ``wheel-uploader`` script, you'll need twine and `beautiful soup 4
-<bs4>`_.
+<https://www.crummy.com/software/BeautifulSoup/>`_.
 
 You will typically have a directory on your machine where you store wheels,
 called a `wheelhouse`.   The typical call for `wheel-uploader` would then
