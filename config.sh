@@ -1,7 +1,7 @@
 # Define custom utilities
 # Test for OSX with [ -n "$IS_OSX" ]
 LZO_VERSION=2.09
-BLOSC_VERSION=1.11.3
+BLOSC_VERSION=1.14.3
 
 function build_wheel {
     local repo_dir=${1:-$REPO_DIR}

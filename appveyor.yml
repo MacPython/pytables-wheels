@@ -2,7 +2,7 @@ environment:
   global:
     REPO_DIR: pytables
     PACKAGE_NAME: tables
-    BUILD_COMMIT: v3.4.2
+    BUILD_COMMIT: v3.4.3
     BUILDWHEEL: "True"  # trigger setup.py to include zlib.dll
     BUILD_DEPENDS: "hdf5 numpy>=1.8.0 numexpr>=2.5.2 six cython bzip2"
     TEST_DEPENDS: "numpy>=1.8.0 numexpr>=2.5.2 six>=1.9.0 mock"
@@ -82,10 +82,7 @@ test_script:
     - pip install --no-index --find-links dist/ %PACKAGE_NAME%
 
     - cd ..
-    # numpy 1.13.0 breaks the tests. The failure is not critical.
-    # Run only basics tests until numpy 1.13.1 is available.
-    #- python -m tables.tests.test_all
-    - python -m tables.tests.test_basics
+    - python -m tables.tests.test_all
 
 artifacts:
     - path: "%REPO_DIR%\\dist\\*"
