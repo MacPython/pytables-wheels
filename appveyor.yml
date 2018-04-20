@@ -11,11 +11,6 @@ environment:
         secure:
             9s0gdDGnNnTt7hvyNpn0/ZzOMGPdwPp2SewFTfGzYk7uI+rdAN9rFq2D1gAP4NQh
 
-    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
-    # /E:ON and /V:ON options are not enabled in the batch script intepreter
-    # See: http://stackoverflow.com/a/13751649/163740
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C %APPVEYOR_BUILD_FOLDER%\\multibuild\\ci\\appveyor\\windows_sdk.cmd"
-
   matrix:
     - PYTHON: "C:\\Miniconda"
       PYTHON_VERSION: "2.7"
@@ -48,9 +43,6 @@ install:
     # Fetch submodules
     - git submodule update --init --recursive
 
-    # Install miniconda and fix headers
-    - ps: .\\multibuild\\ci\\appveyor\\install.ps1
-    - ps: .\\multibuild\\ci\\appveyor\\missing-headers.ps1
     - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PYTHON%\Library\bin;%PATH%
     - conda info
 
@@ -71,7 +63,7 @@ build_script:
     # build wheel:
     - cd %REPO_DIR%
     - git checkout %BUILD_COMMIT%
-    - "%CMD_IN_ENV% python setup.py bdist_wheel"
+    - python setup.py bdist_wheel
 
 test_script:
     # create test env
