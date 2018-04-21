@@ -2,7 +2,7 @@ environment:
   global:
     REPO_DIR: pytables
     PACKAGE_NAME: tables
-    BUILD_COMMIT: v3.4.2
+    BUILD_COMMIT: v3.4.3
     BUILDWHEEL: "True"  # trigger setup.py to include zlib.dll
     BUILD_DEPENDS: "hdf5 numpy>=1.8.0 numexpr>=2.5.2 six cython bzip2"
     TEST_DEPENDS: "numpy>=1.8.0 numexpr>=2.5.2 six>=1.9.0 mock"
@@ -10,11 +10,6 @@ environment:
     WHEELHOUSE_UPLOADER_SECRET:
         secure:
             9s0gdDGnNnTt7hvyNpn0/ZzOMGPdwPp2SewFTfGzYk7uI+rdAN9rFq2D1gAP4NQh
-
-    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
-    # /E:ON and /V:ON options are not enabled in the batch script intepreter
-    # See: http://stackoverflow.com/a/13751649/163740
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C %APPVEYOR_BUILD_FOLDER%\\multibuild\\ci\\appveyor\\windows_sdk.cmd"
 
   matrix:
     - PYTHON: "C:\\Miniconda"
@@ -48,9 +43,6 @@ install:
     # Fetch submodules
     - git submodule update --init --recursive
 
-    # Install miniconda and fix headers
-    - ps: .\\multibuild\\ci\\appveyor\\install.ps1
-    - ps: .\\multibuild\\ci\\appveyor\\missing-headers.ps1
     - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PYTHON%\Library\bin;%PATH%
     - conda info
 
@@ -71,7 +63,7 @@ build_script:
     # build wheel:
     - cd %REPO_DIR%
     - git checkout %BUILD_COMMIT%
-    - "%CMD_IN_ENV% python setup.py bdist_wheel"
+    - python setup.py bdist_wheel
 
 test_script:
     # create test env
@@ -82,10 +74,7 @@ test_script:
     - pip install --no-index --find-links dist/ %PACKAGE_NAME%
 
     - cd ..
-    # numpy 1.13.0 breaks the tests. The failure is not critical.
-    # Run only basics tests until numpy 1.13.1 is available.
-    #- python -m tables.tests.test_all
-    - python -m tables.tests.test_basics
+    - python -m tables.tests.test_all
 
 artifacts:
     - path: "%REPO_DIR%\\dist\\*"

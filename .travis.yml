@@ -1,7 +1,7 @@
 env:
     global:
         - REPO_DIR=pytables
-        - BUILD_COMMIT=v3.4.2   # Remember to update BLOSC_VERSION in config.sh
+        - BUILD_COMMIT=v3.4.3   # Remember to update BLOSC_VERSION in config.sh
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - NP_BUILD_DEP=1.8.0
@@ -100,6 +100,8 @@ before_install:
 install:
     # Maybe get and clean and patch source
     - clean_code $REPO_DIR $BUILD_COMMIT
+    # Patch pytables to disable AVX2 in built-in C-BLOSC
+    - patch -p0 $REPO_DIR/setup.py <noavx2.patch
     - build_wheel $REPO_DIR $PLAT
 
 script:
