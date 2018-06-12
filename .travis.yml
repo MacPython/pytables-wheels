@@ -1,7 +1,7 @@
 env:
     global:
         - REPO_DIR=pytables
-        - BUILD_COMMIT=v3.4.3   # Remember to update BLOSC_VERSION in config.sh
+        - BUILD_COMMIT=v3.4.4   # Remember to update BLOSC_VERSION in config.sh
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - NP_BUILD_DEP=1.8.0
