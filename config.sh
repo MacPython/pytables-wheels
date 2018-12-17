@@ -18,7 +18,6 @@ function build_libs {
 }
 
 function build_linux_wheel {
-    source multibuild/library_builders.sh
     build_libs
     # Add workaround for auditwheel bug:
     # https://github.com/pypa/auditwheel/issues/29
@@ -43,7 +42,6 @@ function build_osx_wheel {
     export FFLAGS="$CFLAGS"
     export LDFLAGS="$CFLAGS"
     # Build libraries
-    source multibuild/library_builders.sh
     build_libs
     # Build wheel
     local py_ld_flags="-Wall -undefined dynamic_lookup -bundle"
