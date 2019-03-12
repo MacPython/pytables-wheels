@@ -1,7 +1,7 @@
 env:
     global:
         - REPO_DIR=pytables
-        - BUILD_COMMIT=v3.4.4   # Remember to update BLOSC_VERSION in config.sh
+        - BUILD_COMMIT=v3.5.0   # Remember to update this for every new PyTables release!
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - NP_BUILD_DEP=1.8.0
@@ -62,14 +62,25 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
-        - NP_BUILD_DEP="1.11.3"
-        - NP_TEST_DEP="1.11.3"
+        - NP_BUILD_DEP="1.16.2"
+        - NP_TEST_DEP="1.16.2"
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
         - PLAT=i686
-        - NP_BUILD_DEP="1.11.3"
-        - NP_TEST_DEP="1.11.3"
+        - NP_BUILD_DEP="1.16.2"
+        - NP_TEST_DEP="1.16.2"
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.7
+        - PLAT=i686
+        - NP_BUILD_DEP="1.16.2"
+        - NP_TEST_DEP="1.16.2"
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.7
+        - NP_BUILD_DEP="1.16.2"
+        - NP_TEST_DEP="1.16.2"
     - os: osx
       language: objective-c
       env:
@@ -89,6 +100,12 @@ matrix:
         - MB_PYTHON_VERSION=3.6
         - NP_BUILD_DEP="1.11.3"
         - NP_TEST_DEP="1.11.3"
+    - os: osx
+      language: objective-c
+      env:
+        - MB_PYTHON_VERSION=3.7
+        - NP_BUILD_DEP="1.16.2"
+        - NP_TEST_DEP="1.16.2"
 
 before_install:
     - BUILD_DEPENDS="numpy==$NP_BUILD_DEP six Cython"
