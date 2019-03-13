@@ -4,8 +4,9 @@ env:
         - BUILD_COMMIT=v3.5.0   # Remember to update this for every new PyTables release!
         - PLAT=x86_64
         - UNICODE_WIDTH=32
-        - NP_BUILD_DEP=1.8.0
-        - NP_TEST_DEP=1.8.0
+        - NP_BUILD_DEP=1.9.3
+        - NP_TEST_DEP=1.9.3
+        - DISABLE_AVX2=True  # do not include AVX2 in this build
         - MANYLINUX_URL=https://nipy.bic.berkeley.edu/manylinux
         - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
         # Following generated with
@@ -51,14 +52,10 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.5
-        - NP_BUILD_DEP="1.9.3"
-        - NP_TEST_DEP="1.9.3"
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.5
         - PLAT=i686
-        - NP_BUILD_DEP="1.9.3"
-        - NP_TEST_DEP="1.9.3"
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
@@ -73,33 +70,28 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.7
-        - PLAT=i686
         - NP_BUILD_DEP="1.16.2"
         - NP_TEST_DEP="1.16.2"
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.7
+        - PLAT=i686
         - NP_BUILD_DEP="1.16.2"
         - NP_TEST_DEP="1.16.2"
     - os: osx
       language: objective-c
       env:
         - MB_PYTHON_VERSION=2.7
-        # Pypi only has 1.8.1
-        - NP_BUILD_DEP=1.8.1
-        - NP_TEST_DEP=1.8.1
     - os: osx
       language: objective-c
       env:
         - MB_PYTHON_VERSION=3.5
-        - NP_BUILD_DEP="1.9.3"
-        - NP_TEST_DEP="1.9.3"
     - os: osx
       language: objective-c
       env:
         - MB_PYTHON_VERSION=3.6
-        - NP_BUILD_DEP="1.11.3"
-        - NP_TEST_DEP="1.11.3"
+        - NP_BUILD_DEP="1.16.2"
+        - NP_TEST_DEP="1.16.2"
     - os: osx
       language: objective-c
       env:
@@ -117,8 +109,6 @@ before_install:
 install:
     # Maybe get and clean and patch source
     - clean_code $REPO_DIR $BUILD_COMMIT
-    # Patch pytables to disable AVX2 in built-in C-BLOSC
-    - patch -p0 $REPO_DIR/setup.py <noavx2.patch
     - build_wheel $REPO_DIR $PLAT
 
 script:
