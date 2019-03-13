@@ -7,6 +7,7 @@ environment:
     BUILD_DEPENDS: "hdf5 numpy>=1.9.3 numexpr>=2.6.2 six cython bzip2"
     TEST_DEPENDS: "numpy>=1.9.3 numexpr>=2.6.2 six>=1.9.0 mock"
     DISABLE_AVX2: "True"  # do not include AVX2 in this build
+    HDF5_VERSION: 1.10.4
     WHEELHOUSE_UPLOADER_USERNAME: travis-worker
     WHEELHOUSE_UPLOADER_SECRET:
         secure:
