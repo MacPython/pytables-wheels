@@ -1,7 +1,6 @@
 env:
     global:
         - REPO_DIR=pytables
-        # Also see DAILY_COMMIT below
         - BUILD_COMMIT=v3.5.0   # Remember to update this for every new PyTables release!
         - PLAT=x86_64
         - UNICODE_WIDTH=32
@@ -13,8 +12,6 @@ env:
         # travis encrypt -r MacPython/h5py-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
         - secure:
             "bScfa6ofgqkeRjtMH5iJgKLL7lVCyjwQ/HzJNlf9FUPrHfqnTs4oeikYKTMa92kLFhOg25Iqwy7sTQd1WmISGV+gvodEVev6OPiBErqBMeO1B6UijstNpiKLkNa+8s3tw1BSTkMzQGBH1kQsIkdfQyFmmC+rMjcZIxsaUiMtiYHH6972e2kNk2XFjAreNUHMw55nRxeY97ta0yCAYrldap0kHsH0fceBin1uT4MUQGr9CCZsz7Th508YFCNLapHIsCuBXCUPJ0jWniPBWWUlGq4sSTWhHmH5VPyj1Vwx2eyonQCp1M1U2FSaeu8TuIumZpNjBxV6BNI/SETTJzCk9BMuJo7cewdWadV2TXcTL0XdRahTZ2J0Oz3kcWPveJZ3fSMY0okelcnrSVmnZJNKqlIvuMtZGePBNfUGo7kwu+IYDOZLOcOg7+X4r2UbSrGPfcvDnDrJkp/YVsIzatB7okS8MGBUBiA0sR3oE9qQe3fV5GVKPMgkFcM2oKPMaVsuFb/bNnpUjjDtMravPbis0/qpQ/PCPfSvLehE7ki/KYpfRE4ShF/utIzHL+8ApFbH8iJmyI9eXS3A+5lq02LGhItRycvb6gBWjptCv8aSdEyIvCWdREgM9OTa+8NiKDnlH+JYSOqBG/Dw/v5TWPv82Vxc1pGMX9R4q1Wy1YE2igY="
-        # Commit when running from master branch
-        - DAILY_COMMIT=master
 
 
 language: python
@@ -101,13 +98,8 @@ before_install:
     # See:
     # https://github.com/travis-ci/travis-ci/issues/8920#issuecomment-352661024
     - python -c "import fcntl; fcntl.fcntl(1, fcntl.F_SETFL, 0)"
-    - if [ "$TRAVIS_BRANCH" == "master" ]; then
-          CONTAINER="pre-release";
-          BUILD_COMMIT=${DAILY_COMMIT:-$BUILD_COMMIT};
-      else
-          CONTAINER=wheels;
-          UPLOAD_ARGS="--no-update-index";
-      fi
+    - CONTAINER=wheels;
+    - UPLOAD_ARGS="--no-update-index";
     - BUILD_DEPENDS="numpy==$NP_BUILD_DEP six Cython"
     - TEST_DEPENDS="numpy==$NP_TEST_DEP six nose mock numexpr"
     - source multibuild/common_utils.sh
