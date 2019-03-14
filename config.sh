@@ -36,44 +36,23 @@ function build_osx_wheel {
     export CC=clang
     export CXX=clang++
     install_pkg_config
-    # 32-bit wheel
-    export CFLAGS="-arch i386"
-    export CXXFLAGS="$CFLAGS"
-    export FFLAGS="$CFLAGS"
-    export LDFLAGS="$CFLAGS"
-    # Build libraries
-    build_libs
-    # Build wheel
-    local py_ld_flags="-Wall -undefined dynamic_lookup -bundle"
-    local wheelhouse32=${wheelhouse}32
-    mkdir -p $wheelhouse32
-    export LDFLAGS="$LDFLAGS $py_ld_flags"
-    export LDSHARED="clang $LDFLAGS $py_ld_flags"
-    build_pip_wheel "$repo_dir"
-    mv ${wheelhouse}/*whl $wheelhouse32
     # 64-bit wheel
     export CFLAGS="-arch x86_64"
     export CXXFLAGS="$CFLAGS"
     export FFLAGS="$CFLAGS"
     export LDFLAGS="$CFLAGS"
     unset LDSHARED
-    # Force rebuild of all libs
-    rm *-stamp
+    # Build libraries
+    source multibuild/library_builders.sh
     build_libs
     # Build wheel
+    local py_ld_flags="-Wall -undefined dynamic_lookup -bundle"
     export LDFLAGS="$LDFLAGS $py_ld_flags"
     export LDSHARED="clang $LDFLAGS $py_ld_flags"
     build_pip_wheel "$repo_dir"
-    # Fuse into dual arch wheel(s)
-    for whl in ${wheelhouse}/*.whl; do
-        delocate-fuse "$whl" "${wheelhouse32}/$(basename $whl)"
-    done
 }
 
 function run_tests {
     # Runs tests on installed distribution from an empty directory
     python -m tables.tests.test_all
-    if [ -n "$IS_OSX" ]; then  # Run 32-bit tests on dual arch wheel
-        arch -i386 python -m tables.tests.test_all
-    fi
 }
