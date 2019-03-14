@@ -9,7 +9,6 @@ env:
         - NP_TEST_DEP=1.9.3
         - HDF5_VERSION=1.10.4
         - DISABLE_AVX2=True  # do not include AVX2 in this build
-        - MANYLINUX_URL=https://nipy.bic.berkeley.edu/manylinux
         - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
         # Following generated with
         # travis encrypt -r MacPython/h5py-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
