@@ -2,7 +2,7 @@ environment:
   global:
     REPO_DIR: pytables
     PACKAGE_NAME: tables
-    BUILD_COMMIT: v3.5.0   # Remember to update this for every new PyTables release!
+    BUILD_COMMIT: v3.5.1   # Remember to update this for every new PyTables release!
     BUILDWHEEL: "True"  # trigger setup.py to include zlib.dll
     BUILD_DEPENDS: "hdf5 numpy>=1.9.3 numexpr>=2.6.2 six cython bzip2"
     TEST_DEPENDS: "numpy>=1.9.3 numexpr>=2.6.2 six>=1.9.0 mock"
