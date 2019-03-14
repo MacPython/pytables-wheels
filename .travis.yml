@@ -8,7 +8,6 @@ env:
         - NP_BUILD_DEP=1.9.3
         - NP_TEST_DEP=1.9.3
         - HDF5_VERSION=1.10.4
-        - DISABLE_AVX2=True  # do not include AVX2 in this build
         - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
         # Following generated with
         # travis encrypt -r MacPython/h5py-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
@@ -79,11 +78,6 @@ matrix:
       language: generic
       env:
         - MB_PYTHON_VERSION=2.7
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.4
-        - NP_BUILD_DEP="1.7.1"
     - os: osx
       language: generic
       env:

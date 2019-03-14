@@ -26,6 +26,7 @@ function build_linux_wheel {
         patchelf --set-rpath $(dirname $bad_lib) $bad_lib
     fi
     export CFLAGS="-std=gnu99 $CFLAGS"
+    export DISABLE_AVX2="True"  # wheels should never have AVX2 enabled
     build_bdist_wheel $@
 }
 
@@ -49,6 +50,7 @@ function build_osx_wheel {
     local py_ld_flags="-Wall -undefined dynamic_lookup -bundle"
     export LDFLAGS="$LDFLAGS $py_ld_flags"
     export LDSHARED="clang $LDFLAGS $py_ld_flags"
+    export DISABLE_AVX2="True"  # wheels should never have AVX2 enabled
     build_pip_wheel "$repo_dir"
 }
 
