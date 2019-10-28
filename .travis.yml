@@ -1,7 +1,7 @@
 env:
     global:
         - REPO_DIR=pytables
-        - BUILD_COMMIT=v3.6.0 # Remember to update this for every new PyTables release!
+        - BUILD_COMMIT=v3.6.1 # Remember to update this for every new PyTables release!
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - NP_BUILD_DEP=1.9.3
@@ -48,6 +48,17 @@ matrix:
         - PLAT=i686
         - NP_BUILD_DEP="1.14.5"
         - NP_TEST_DEP="1.14.5"
+     - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.8
+        - NP_BUILD_DEP="1.17.3"
+        - NP_TEST_DEP="1.17.3"
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.8
+        - PLAT=i686
+        - NP_BUILD_DEP="1.17.3"
+        - NP_TEST_DEP="1.17.3"
     - os: osx
       language: generic
       env:
@@ -60,6 +71,12 @@ matrix:
         - MB_PYTHON_VERSION=3.7
         - NP_BUILD_DEP="1.14.5"
         - NP_TEST_DEP="1.14.5"
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.8
+        - NP_BUILD_DEP="1.17.3"
+        - NP_TEST_DEP="1.17.3"
 
 before_install:
     # See:
