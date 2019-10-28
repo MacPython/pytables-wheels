@@ -1,7 +1,7 @@
 env:
     global:
         - REPO_DIR=pytables
-        - BUILD_COMMIT=v3.6.0 # Remember to update this for every new PyTables release!
+        - BUILD_COMMIT=v3.6.1 # Remember to update this for every new PyTables release!
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - NP_BUILD_DEP=1.9.3
