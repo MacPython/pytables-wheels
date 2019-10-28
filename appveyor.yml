@@ -14,6 +14,12 @@ environment:
             9s0gdDGnNnTt7hvyNpn0/ZzOMGPdwPp2SewFTfGzYk7uI+rdAN9rFq2D1gAP4NQh
 
   matrix:
+    - PYTHON: "C:\\Miniconda35"
+      PYTHON_VERSION: "3.5"
+      PYTHON_ARCH: "32"
+    - PYTHON: "C:\\Miniconda35-x64"
+      PYTHON_VERSION: "3.5"
+      PYTHON_ARCH: "64"
     - PYTHON: "C:\\Miniconda36"
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "32"
@@ -26,6 +32,7 @@ environment:
     - PYTHON: "C:\\Miniconda37-x64"
       PYTHON_VERSION: "3.7"
       PYTHON_ARCH: "64"
+
 
 # We always use a 64-bit machine, but can build x86 distributions
 # with the PYTHON_ARCH variable.
@@ -50,6 +57,9 @@ build_script:
     # Install build requirements
     - conda create --yes -n build_env python=%PYTHON_VERSION% %BUILD_DEPENDS%
     - activate build_env
+
+    # FIXME update Cython for python 3.5
+    - pip install -U cython
 
     # Additional pre install steps:
     - set HDF5_DIR=%CONDA_PREFIX%\Library\
